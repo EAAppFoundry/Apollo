@@ -16,7 +16,7 @@ namespace ApolloTFSCrawler
             var doc = new RequirementsDocument()
                           {
                               ID = "requirement1",
-                              Title = "This is the title.",
+                              Title = "This is the title. Tile",
                               Status = "Status1",
                               Project = "Project 1",
                               Department = "Department 1",

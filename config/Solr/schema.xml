@@ -454,7 +454,7 @@
    -->
 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
-   <field name="title" type="string" indexed="true" stored="true" required="true"/>
+   <field name="title" type="text" indexed="true" stored="true" required="true"/>
    <field name="area" type="string" indexed="true" stored="true" required="false"/>
    <field name="status" type="string" indexed="true" stored="true" required="true"/>
    <field name="description" type="text" indexed="true" stored="true" required="false"/>
