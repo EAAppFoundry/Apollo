@@ -53,7 +53,7 @@ namespace ApolloTFSCrawler
         [SolrField("storyuri")]
         public string StoryURI { get; set; }
 
-        [SolrField("referenceid")]
+        [SolrField("referenceID")]
         public string ReferenceID { get; set; }
 
         [SolrField("project")]
