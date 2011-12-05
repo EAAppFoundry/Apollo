@@ -554,6 +554,7 @@
    
    <copyField source="description" dest="text"/>
    <copyField source="acceptancecriteria" dest="text"/>
+   <copyField source="title" dest="text"/>
    
    <!-- Above, multiple source fields are copied to the [text] field. 
 	  Another way to map multiple source fields to the same 

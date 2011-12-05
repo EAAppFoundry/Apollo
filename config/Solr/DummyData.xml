@@ -1,0 +1,45 @@
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<add><doc>
+  <field name="id">req1</field>
+  <field name="title">As a POD user, I do not want Rudolph xml sent if there is already an ingest record for that CID in POM</field>
+  <field name="status">Complete</field>
+  <field name="project">DTK</field>
+  <field name="department">NetOps</field>
+  <field name="systemsource">TFS 08</field>
+  <field name="lastindexed">2005-08-01T16:30:25Z</field>
+  <field name="description">
+    Modify the AWK web services to add a new method that accepts an array of CIDs and returns the mID and dID for items that match.
+    Write tests for this new method.
+    Include those tests into the CI build
+    Modify the GGG adapter to:
+    Get a list of reels and materialIDs for that CID
+    Call this new service with the CID
+    If it returns all of the segments, then do not send a file. Mark the work as complete and log that it was skipped.
+    Otherwise send the file
+
+
+    Questions:
+    Should we be sending xml for versions past a certain date?
+    How can we identify if something is ingested? Instance.d_id?
+    What happens if it is partially ingested?
+    What happens if the segments are ingested but under a different d_ID?
+  </field>
+ 
+</doc></add>
+

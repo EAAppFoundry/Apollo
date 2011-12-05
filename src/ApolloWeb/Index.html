@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>Code Curator</title>
+    <title>Apollo</title>
     <script src="Scripts/jquery-1.6.js" type="text/javascript"></script>
     <script src="Scripts/jquery.tmpl.js" type="text/javascript"></script>
     <script src="Scripts/jquery.cookie.js" type="text/javascript"></script>
@@ -18,7 +18,7 @@
     
     <table>
     <tr>
-    <td style="width:200px"><h1>Code Curator</h1></td>
+    <td style="width:200px"><h1>Apollo</h1></td>
     <td>
         
     <input id="txtSearch" style="width: 500px"/>
@@ -63,10 +63,10 @@
             Showing records ${(_searchParams.pageSize*_searchParams.pageNumber)+1} through ${getMaxRecordCount()}<br/><br/>
 
              {{each(i,doc) response.docs}}
-                <a href="detail.html?id=${doc.id}&searchQuery=${responseHeader.params.q}" target="_blank"><b>${doc.name}</b></a><br/>
-               ..{{html highlighting[doc.id].filedata}}..
+                <a href="detail.html?id=${doc.id}&searchQuery=${responseHeader.params.q}" target="_blank"><b>${doc.title}</b></a><br/>
+               ..{{html highlighting[doc.id].description}}..
                <br/>
-               <small>${doc.fullpath}</small>
+               <small>${doc.project}</small>
                <br/>
                <small><i>Indexed: ${formatTimestamp(doc.timestamp)}</i></small>
                <br/>
@@ -96,14 +96,14 @@
         </div>
     </script>
     <script id="facetsTemplate" type="text/x-jQuery-tmpl">
-        Category:
+        department:
         <ul>
-            {{each(i,facet) categoryFacets}}
-            {{if _searchParams.category==facet.term}}
-                <li style="background-color: #FFFF00"><a href="#top" class="categoryFacetLink">${facet.term}</a> (${facet.count}) &nbsp;&nbsp;&nbsp;<a href="#top" class="removeFacet">X</a></li>
+            {{each(i,facet) departmentFacets}}
+            {{if _searchParams.department==facet.term}}
+                <li style="background-color: #FFFF00"><a href="#top" class="departmentFacetLink">${facet.term}</a> (${facet.count}) &nbsp;&nbsp;&nbsp;<a href="#top" class="removeFacet">X</a></li>
             {{else}}
                 {{if facet.count>0}}
-                    <li><a href="#top" class="categoryFacetLink">${facet.term}</a> (${facet.count})</li>
+                    <li><a href="#top" class="departmentFacetLink">${facet.term}</a> (${facet.count})</li>
                 {{/if}}
             {{/if}}
             {{/each}}

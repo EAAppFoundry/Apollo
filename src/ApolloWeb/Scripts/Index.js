@@ -1,11 +1,11 @@
-﻿
+﻿var COOKIE_NAME = "Apollo_PageSize";
 
 var _searchParams = {
     pageSize : 5,
     pageNumber : 0,
     startRecord : 0,
     project : null,
-    category : null
+    department : null
 };
 
 var _searchResults = {
@@ -66,18 +66,19 @@ function getPageSize() {
     var pagesize = $("#lstPerPage").val();
     
     //save it into a cookie
-    $.cookie("CodeSearch_PageSize", pagesize.toString(), { expires: 30 });
+    $.cookie(COOKIE_NAME, pagesize.toString(), { expires: 30 });
     return pagesize;
 }
 
 function buildSearchUrl() {
     var searchString = getSearchString();
-    var url = _solrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=id,fullpath,project,name,timestamp,category&echoparms=true&facet=true&facet.field=category&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
+    var returnedFields = "id,project,title,lastindexed,department"
+    var url = _solrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=" + returnedFields + "&echoparms=true&facet=true&facet.field=department&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
 
     if (_searchParams.project!=null)
         url+= "&fq=project:\"" + escape(_searchParams.project) + "\"";
-    else if (_searchParams.category!=null)
-        url+= "&fq=category:\"" + escape(_searchParams.category) + "\"";
+    else if (_searchParams.department!=null)
+        url+= "&fq=department:\"" + escape(_searchParams.department) + "\"";
 
     //alert(url);
 
@@ -116,12 +117,12 @@ function buildFacetResults(result) {
     for (var i = 0; i < result.facet_counts.facet_fields.project.length; i += 2)
         projectFacetResults[i / 2] = { term: result.facet_counts.facet_fields.project[i], count: result.facet_counts.facet_fields.project[i + 1] };
 
-    var categoryFacetResults = new Array();
+    var departmentFacetResults = new Array();
 
-    for (var i = 0; i < result.facet_counts.facet_fields.category.length; i += 2)
-        categoryFacetResults[i / 2] = { term: result.facet_counts.facet_fields.category[i], count: result.facet_counts.facet_fields.category[i + 1] };
+    for (var i = 0; i < result.facet_counts.facet_fields.department.length; i += 2)
+        departmentFacetResults[i / 2] = { term: result.facet_counts.facet_fields.department[i], count: result.facet_counts.facet_fields.department[i + 1] };
                                                     
-    $("#facetsDiv").html($("#facetsTemplate").tmpl({projectFacets: projectFacetResults, categoryFacets: categoryFacetResults}));
+    $("#facetsDiv").html($("#facetsTemplate").tmpl({projectFacets: projectFacetResults, departmentFacets: departmentFacetResults}));
 
     $(".projectFacetLink").click(function (e) {
         _searchParams.pageNumber=0;
@@ -130,10 +131,10 @@ function buildFacetResults(result) {
         doSearch();
     });
 
-     $(".categoryFacetLink").click(function (e) {
+     $(".departmentFacetLink").click(function (e) {
         _searchParams.pageNumber=0;
         _searchParams.startRecord=0;
-        _searchParams.category=$(this).html();
+        _searchParams.department=$(this).html();
         doSearch();
     });
 
@@ -141,7 +142,7 @@ function buildFacetResults(result) {
         _searchParams.pageNumber=0;
         _searchParams.startRecord=0;
         _searchParams.project=null;
-        _searchParams.category=null;
+        _searchParams.department=null;
         doSearch();
     });
 }
@@ -169,7 +170,7 @@ function formatTimestamp(timestamp) {
 $(document).ready(function () {
     $("#btnSearch").click(function () {
         _searchParams.project=null;
-        _searchParams.category=null;
+        _searchParams.department=null;
         _searchParams.startRecord=0;
         _searchParams.pageNumber=0;
 
@@ -185,7 +186,7 @@ $(document).ready(function () {
         }
     });
 
-    var pageSizeCookie = $.cookie("CodeSearch_PageSize");
+    var pageSizeCookie = $.cookie(COOKIE_NAME);
     if (pageSizeCookie)
         $("#lstPerPage").val(pageSizeCookie);
 
