@@ -16,21 +16,6 @@ namespace ApolloTFSCrawler
             Startup.Init<RequirementsDocument>("http://localhost:8983/solr");
 
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<RequirementsDocument>>();
-
-            //var doc = new RequirementsDocument()
-            //              {
-            //                  ID = "requirement1",
-            //                  Title = "This is the title. Tile",
-            //                  Status = "Status1",
-            //                  Project = "Project 1",
-            //                  Department = "Department 1",
-            //                  SystemSource = "System 1",
-            //                  LastIndexed = DateTime.Now,
-            //                  Description =
-            //                      "This is the description of the requirements. Here are some things to search for. FBD CID Orion"
-            //              };
-
-            ////do a commit just in case
             solr.Commit();
 
             Uri collectionUri2010 = new Uri("http://eavtfs2010:8080/tfs");
@@ -39,6 +24,7 @@ namespace ApolloTFSCrawler
             var workItemStore2008 = GetWorkItemStore(collectionUri2008);
             var workItemStore2010 = GetWorkItemStore(collectionUri2010);
 
+            //TODO: Move this to a configuration file
             var mappers = new List<ITFSMapper>();
             mappers.Add(new ScrumMapper("Commercials (MTS)", workItemStore2008));
             mappers.Add(new ScrumMapper("Millennium", workItemStore2008));
