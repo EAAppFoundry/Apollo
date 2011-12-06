@@ -8,16 +8,14 @@ namespace ApolloCrawler.Mapping
     public class ScrumMapper : IMapper
     {
         private string _systemName = "TFS 2008 Scrum";
-        private string _projectName=null;
         private WorkItemStore _workItemStore = null;
-        private string _url = null;
         private List<Sprint> _allSprints;
+        private Configuration.Project _project = null;
 
-        public ScrumMapper(string projectName, string url)
+        public ScrumMapper(Configuration.Project project)
         {
-            _projectName = projectName;
-            _workItemStore = WorkItemStoreManager.GetWorkItemStoreForUrl(url);
-            _url = url;
+            _project = project;
+            _workItemStore = WorkItemStoreManager.GetWorkItemStoreForUrl(_project.Url);
         }
 
         public RequirementsDocument[] FindAllWorkItemsForProject()
@@ -30,7 +28,7 @@ namespace ApolloCrawler.Mapping
                 Where 
                 ([Work Item Type] = 'Product Backlog Item')
                     and 
-                ([Team Project] = '" + _projectName + @"')
+                ([Team Project] = '" + _project.ProjectName + @"')
                     and
                 ([State] <> 'Deleted')
                 Order By [State] Asc, [Changed Date] Desc");
@@ -51,7 +49,7 @@ namespace ApolloCrawler.Mapping
                            Title = wi.Fields["Title"].Value.ToString(),
                            Status = wi.Fields["State"].Value.ToString(),
                            Project = wi.Fields["Team Project"].Value.ToString(),
-                           Department = "NetOps",
+                           Department = _project.Department,
                            SystemSource = _systemName,
                            LastIndexed = DateTime.Now,
                            Description = wi.Fields["Description"].Value.ToString(),
@@ -64,7 +62,7 @@ namespace ApolloCrawler.Mapping
                            LastUpdated = DateTime.Parse(wi.Fields["Changed Date"].Value.ToString()),
                            Area = wi.Fields["Area Path"].Value.ToString(),
                            Discipline = "Development",
-                           StoryURI = _url + "wi.aspx?id=" + wi.Fields["ID"].Value.ToString()
+                           StoryURI = _project.Url + "wi.aspx?id=" + wi.Fields["ID"].Value.ToString()
                            
                        };
 
@@ -88,7 +86,7 @@ namespace ApolloCrawler.Mapping
                 Where 
                 ([Work Item Type] = 'Sprint')
                     and 
-                ([Team Project] = '" + _projectName + @"')
+                ([Team Project] = '" + _project.ProjectName + @"')
                 
                 Order By [State] Asc, [Changed Date] Desc");
 

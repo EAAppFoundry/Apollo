@@ -8,15 +8,13 @@ namespace ApolloCrawler.Mapping
     public class UrbanTurtleMapper : IMapper
     {
         private string _systemName = "TFS 2010 Urban Turtle";
-        private string _projectName=null;
         private WorkItemStore _workItemStore = null;
-        private string _url;
+        private Configuration.Project _project = null;
 
-        public UrbanTurtleMapper(string projectName,  string url)
+        public UrbanTurtleMapper(Configuration.Project project)
         {
-            _projectName = projectName;
-            _workItemStore = WorkItemStoreManager.GetWorkItemStoreForUrl(url);
-            _url = url;
+            _project = project;
+            _workItemStore = WorkItemStoreManager.GetWorkItemStoreForUrl(_project.Url);
         }
 
         public RequirementsDocument[] FindAllWorkItemsForProject()
@@ -27,7 +25,7 @@ namespace ApolloCrawler.Mapping
                 Where 
                 ([Work Item Type] = 'User Story')
                     and 
-                ([Team Project] = '" + _projectName + @"')
+                ([Team Project] = '" + _project.ProjectName + @"')
                     and
                 ([State] <> 'Removed')
                 Order By [State] Asc, [Changed Date] Desc");
@@ -50,7 +48,7 @@ namespace ApolloCrawler.Mapping
                            Title = wi.Fields["Title"].Value.ToString(),
                            Status = wi.Fields["State"].Value.ToString(),
                            Project = wi.Fields["Team Project"].Value.ToString(),
-                           Department = "NetOps",
+                           Department = _project.Department,
                            SystemSource = _systemName,
                            LastIndexed = DateTime.Now,
                            Description = wi.Fields["Description"].Value.ToString(),
@@ -63,7 +61,7 @@ namespace ApolloCrawler.Mapping
                            LastUpdated = DateTime.Parse(wi.Fields["Changed Date"].Value.ToString()),
                            ReleaseIteration = wi.Fields["Iteration Path"].Value.ToString(),
                            StoryType = "Story",
-                           StoryURI = _url + "/web/UI/Pages/WorkItems/WorkItemEdit.aspx?id=" + wi.Fields["ID"].Value.ToString()
+                           StoryURI = _project.Url + "/web/UI/Pages/WorkItems/WorkItemEdit.aspx?id=" + wi.Fields["ID"].Value.ToString()
                           
                        };
         }
