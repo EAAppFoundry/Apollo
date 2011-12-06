@@ -42,7 +42,7 @@ namespace ApolloCrawler.Mapping
         {
             string iterationPath = wi.Fields["Iteration Path"].Value.ToString();
             Sprint sprint = _allSprints.Where(X => X.FullPath == iterationPath).FirstOrDefault();
-
+            
             var result = new RequirementsDocument()
                        {
                            ID = IDGenerator.GetUniqueIDForDocument(wi.Fields["ID"].Value.ToString(),_systemName),
@@ -62,7 +62,8 @@ namespace ApolloCrawler.Mapping
                            LastUpdated = DateTime.Parse(wi.Fields["Changed Date"].Value.ToString()),
                            Area = wi.Fields["Area Path"].Value.ToString(),
                            Discipline = "Development",
-                           StoryURI = _project.Url + "wi.aspx?id=" + wi.Fields["ID"].Value.ToString()
+                           //TODO: don't hardcode these ports
+                           StoryURI = _project.Url.Replace(":8080", ":8090") + "wi.aspx?id=" + wi.Fields["ID"].Value.ToString()
                            
                        };
 

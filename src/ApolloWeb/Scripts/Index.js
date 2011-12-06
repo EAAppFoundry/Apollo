@@ -72,7 +72,7 @@ function getPageSize() {
 
 function buildSearchUrl() {
     var searchString = getSearchString();
-    var returnedFields = "id,project,title,lastindexed,department"
+    var returnedFields = "id,project,title,lastindexed,department,storyuri"
     var url = _solrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=" + returnedFields + "&echoparms=true&facet=true&facet.field=department&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
 
     if (_searchParams.project!=null)
