@@ -57,6 +57,7 @@
     <Compile Include="Configuration\ConfigurationSettings.cs" />
     <Compile Include="Configuration\Project.cs" />
     <Compile Include="IDGenerator.cs" />
+    <Compile Include="Mapping\PivotalTrackerMapper.cs" />
     <Compile Include="Mapping\Scrum2010Mapper.cs" />
     <Compile Include="Mapping\IMapper.cs" />
     <Compile Include="Mapping\MapperFactory.cs" />
