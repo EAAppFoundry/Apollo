@@ -163,7 +163,11 @@ function hookPagerClicks() {
 
 
 function formatTimestamp(timestamp) {
+    if (timestamp==undefined)
+        return "";
+
     var newDate = new Date(timestamp);
+    
     return newDate.toString();
 }
 
