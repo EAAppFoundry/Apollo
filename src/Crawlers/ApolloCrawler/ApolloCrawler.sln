@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApolloTFSCrawler", "ApolloTFSCrawler\ApolloTFSCrawler.csproj", "{45CD60DF-8BEA-4BDE-9819-90B963F67380}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApolloCrawler", "ApolloCrawler\ApolloCrawler.csproj", "{45CD60DF-8BEA-4BDE-9819-90B963F67380}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

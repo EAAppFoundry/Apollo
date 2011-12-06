@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace ApolloTFSCrawler.TFSMapping
+namespace ApolloCrawler.Mapping
 {
-    public class ScrumMapper : ITFSMapper
+    public class ScrumMapper : IMapper
     {
         private string _systemName = "TFS 2008 Scrum";
         private string _projectName=null;

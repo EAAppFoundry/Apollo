@@ -1,7 +1,7 @@
 ﻿using System;
 using SolrNet.Attributes;
 
-namespace ApolloTFSCrawler
+namespace ApolloCrawler
 {
     public class RequirementsDocument
     {

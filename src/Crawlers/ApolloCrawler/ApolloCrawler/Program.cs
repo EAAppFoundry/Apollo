@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ApolloTFSCrawler.TFSMapping;
+using ApolloCrawler.Mapping;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using Microsoft.TeamFoundation.Client;
 using SolrNet;
 
-namespace ApolloTFSCrawler
+namespace ApolloCrawler
 {
     internal class Program
     {
@@ -25,7 +25,7 @@ namespace ApolloTFSCrawler
             var workItemStore2010 = GetWorkItemStore(collectionUri2010);
 
             //TODO: Move this to a configuration file
-            var mappers = new List<ITFSMapper>();
+            var mappers = new List<IMapper>();
             mappers.Add(new ScrumMapper("Commercials (MTS)", workItemStore2008));
             mappers.Add(new ScrumMapper("Millennium", workItemStore2008));
             mappers.Add(new ScrumMapper("NetOps", workItemStore2008));

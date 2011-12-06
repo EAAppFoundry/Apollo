@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ApolloTFSCrawler
+namespace ApolloCrawler
 {
     public class IDGenerator
     {

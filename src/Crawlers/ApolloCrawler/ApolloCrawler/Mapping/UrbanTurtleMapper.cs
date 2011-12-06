@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
+using ApolloCrawler.Mapping;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace ApolloTFSCrawler.TFSMapping
+namespace ApolloCrawler.Mapping
 {
-    public class UrbanTurtleMapper : ITFSMapper
+    public class UrbanTurtleMapper : IMapper
     {
         private string _systemName = "TFS 2010 Urban Turtle";
         private string _projectName=null;
