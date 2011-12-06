@@ -1,0 +1,45 @@
+<ConfigurationSettings>
+  <SolrUrl>http://localhost:8983/solr</SolrUrl>
+  <Projects>
+    <ProjectName>Affiliate Portal</ProjectName>
+    <SystemType>TFS2010Scrum</SystemType>
+    <Url>http://eavtfs2010:8080/tfs</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>Turner Digital Library</ProjectName>
+    <SystemType>TFSUrbanTurtle</SystemType>
+    <Url>http://eavtfs2010:8080/tfs</Url>
+  </Projects>
+
+  <Projects>
+    <ProjectName>Commercials (MTS)</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>Digital Media Initiatives</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>Millennium</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>NetOps</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>NewsDesk</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  <Projects>
+    <ProjectName>ScheduALL Studios Upgrade</ProjectName>
+    <SystemType>TFSScrum</SystemType>
+    <Url>http://eavvsts01:8080/</Url>
+  </Projects>
+  
+</ConfigurationSettings>
