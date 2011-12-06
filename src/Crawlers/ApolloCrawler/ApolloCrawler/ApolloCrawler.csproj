@@ -57,6 +57,7 @@
     <Compile Include="Configuration\ConfigurationSettings.cs" />
     <Compile Include="Configuration\Project.cs" />
     <Compile Include="IDGenerator.cs" />
+    <Compile Include="Mapping\PivotalGatewayAgent.cs" />
     <Compile Include="Mapping\PivotalTrackerMapper.cs" />
     <Compile Include="Mapping\Scrum2010Mapper.cs" />
     <Compile Include="Mapping\IMapper.cs" />
@@ -77,6 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ProjectConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PivotalGateway\Apollo.PivotalGateway.csproj">
+      <Project>{DB3243D7-464F-4C00-8E3F-D67830F8290A}</Project>
+      <Name>Apollo.PivotalGateway</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

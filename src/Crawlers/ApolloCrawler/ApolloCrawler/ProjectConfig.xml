@@ -1,5 +1,6 @@
 <ConfigurationSettings>
-  <SolrUrl>http://localhost:8983/solr</SolrUrl>
+  <!--<SolrUrl>http://localhost:8983/solr</SolrUrl>-->
+  <SolrUrl>http://localhost:8088/solr</SolrUrl>
   <Projects>
     <ProjectName>Affiliate Portal</ProjectName>
     <SystemType>TFS2010Scrum</SystemType>

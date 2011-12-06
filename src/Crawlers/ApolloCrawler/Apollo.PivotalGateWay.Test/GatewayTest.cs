@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 
 namespace Apollo.PivotalGateway.Test
@@ -10,11 +8,22 @@ namespace Apollo.PivotalGateway.Test
     public class GatewayTest
     {
         [Test]
+        public void GetAllProjects()
+        {
+
+            var pivotHub = new Agent("340079");
+
+            var projects = pivotHub.Projects;
+
+            Assert.IsNotNull(projects);
+
+            Console.WriteLine(projects.Where(x => x.Name == "Program Mgmt").First().Current_Velocity);
+        }
+
+        [Test]
         public void GetProjectName()
         {
-            int projectId = 340079;
-
-            var pivotHub = new Apollo.PivotalGateway.Harvester(340079);
+            var pivotHub = new Agent("340079");
 
             Assert.IsNotNullOrEmpty(pivotHub.Project.Name);
 
@@ -24,14 +33,23 @@ namespace Apollo.PivotalGateway.Test
         [Test]
         public void GetIterationCount()
         {
-            int projectId = 340079;
-
-            var pivotHub = new Apollo.PivotalGateway.Harvester(340079);
+            var pivotHub = new Agent("340079");
 
             Assert.Greater(pivotHub.Iterations.Count(),0);
 
             Console.WriteLine(pivotHub.Iterations.Count());
             
+        }
+
+        [Test]
+        public void GetFirstStory()
+        {
+            var pivotHub = new Agent("340079");
+            var firstStory = pivotHub.Stories(100, 1);
+            Assert.IsNotNull(firstStory);
+
+            Console.WriteLine(firstStory.First().Description);
+
         }
     }
 }

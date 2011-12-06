@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Attachment.cs" />
     <Compile Include="DateFormatter.cs" />
-    <Compile Include="Harvester.cs" />
+    <Compile Include="Agent.cs" />
     <Compile Include="Iteration.cs" />
     <Compile Include="Iterations.cs" />
     <Compile Include="Membership.cs" />
@@ -53,6 +53,7 @@
     <Compile Include="Person.cs" />
     <Compile Include="PivotalRestRequest.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="Projects.cs" />
     <Compile Include="Stories.cs" />
     <Compile Include="Story.cs" />
     <Compile Include="StoryType.cs" />

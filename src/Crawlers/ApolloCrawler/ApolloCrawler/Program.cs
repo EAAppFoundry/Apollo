@@ -63,6 +63,7 @@ namespace ApolloCrawler
                 solr.AddRange(docs, new AddParameters { CommitWithin = 10000 });
             }
 
+            PopulatePivotalProject(mapperFactory, solr);
 
             //commit and optimize
             solr.Commit();
@@ -70,6 +71,7 @@ namespace ApolloCrawler
             
 
         }
+
 
         /// <summary>
         /// Dumps all of the fields for 
@@ -126,6 +128,17 @@ namespace ApolloCrawler
 
         }
 
-        
+        private static void PopulatePivotalProject(MapperFactory mapperFactory, ISolrOperations<RequirementsDocument> solr)
+        {
+            Configuration.Project pivotproject = new Configuration.Project() { ProjectName = "Program Mgmt", SystemType = SystemType.Pivotal,Url = @"https://www.pivotaltracker.com/services/v3/" };
+
+            var mapper = mapperFactory.GetMapperForProject(pivotproject);
+
+            RequirementsDocument[] docs = mapper.FindAllWorkItemsForProject();
+
+            //submit them to solr
+            solr.AddRange(docs, new AddParameters { CommitWithin = 10000 });
+
+        }       
     }
 }
