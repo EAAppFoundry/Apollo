@@ -10,11 +10,11 @@ namespace ApolloCrawler.Mapping
             switch (project.SystemType)
             {
                     case SystemType.TFSScrum:
-                        return new ScrumMapper(project.ProjectName, project.Url);
+                        return new ScrumMapper(project);
                     case SystemType.TFSUrbanTurtle:
-                        return new UrbanTurtleMapper(project.ProjectName, project.Url);
+                        return new UrbanTurtleMapper(project);
                     case SystemType.TFS2010Scrum:
-                        return new Scrum2010Mapper(project.ProjectName, project.Url);
+                        return new Scrum2010Mapper(project);
                     case SystemType.Pivotal:
                         return new PivotalTrackerMapper(project.ProjectName,project.Url);
             }

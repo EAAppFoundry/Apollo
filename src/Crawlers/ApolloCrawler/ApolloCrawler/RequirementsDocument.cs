@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SolrNet.Attributes;
 
 namespace ApolloCrawler
@@ -21,8 +22,8 @@ namespace ApolloCrawler
         public string Description { get; set; }
 
         [SolrField("relatedstories")]
-        public string RelatedStories { get; set; }
-
+        public ICollection<string> RelatedStories { get; set; }
+        
         [SolrField("team")]
         public string Team { get; set; }
 

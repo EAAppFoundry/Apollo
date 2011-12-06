@@ -3,42 +3,50 @@
   <SolrUrl>http://localhost:8088/solr</SolrUrl>
   <Projects>
     <ProjectName>Affiliate Portal</ProjectName>
+    <Department>Turner Network Sales</Department>
     <SystemType>TFS2010Scrum</SystemType>
     <Url>http://eavtfs2010:8080/tfs</Url>
   </Projects>
   <Projects>
     <ProjectName>Turner Digital Library</ProjectName>
+    <Department>Netops</Department>
     <SystemType>TFSUrbanTurtle</SystemType>
     <Url>http://eavtfs2010:8080/tfs</Url>
   </Projects>
 
   <Projects>
     <ProjectName>Commercials (MTS)</ProjectName>
+    <Department>Netops</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
   <Projects>
     <ProjectName>Digital Media Initiatives</ProjectName>
+    <Department>Netops</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
   <Projects>
     <ProjectName>Millennium</ProjectName>
+    <Department>Turner Network Sales</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
   <Projects>
     <ProjectName>NetOps</ProjectName>
+    <Department>Netops</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
   <Projects>
     <ProjectName>NewsDesk</ProjectName>
+    <Department>News Business Systems</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
   <Projects>
     <ProjectName>ScheduALL Studios Upgrade</ProjectName>
+    <Department>Studios</Department>
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
