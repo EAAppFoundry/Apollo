@@ -15,6 +15,8 @@ namespace ApolloCrawler.Mapping
                         return new UrbanTurtleMapper(project.ProjectName, project.Url);
                     case SystemType.TFS2010Scrum:
                         return new Scrum2010Mapper(project.ProjectName, project.Url);
+                    case SystemType.Pivotal:
+                        return new PivotalTrackerMapper();
             }
 
             return null;
