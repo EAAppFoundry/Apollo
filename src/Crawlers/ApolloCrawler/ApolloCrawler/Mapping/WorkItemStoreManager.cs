@@ -20,6 +20,8 @@ namespace ApolloCrawler.Mapping
                 TfsTeamProjectCollection teamProjectCollection =
                     new TfsTeamProjectCollection(uri);
 
+                
+
                 WorkItemStore workItemStore = teamProjectCollection.GetService<WorkItemStore>();
 
                 _workItemStores.Add(url,workItemStore);
