@@ -11,10 +11,10 @@ namespace ApolloCrawler.Mapping
         private string _projectName=null;
          private WorkItemStore _workItemStore = null;
 
-        public UrbanTurtleMapper(string projectName,  WorkItemStore workItemStore)
+        public UrbanTurtleMapper(string projectName,  string url)
         {
             _projectName = projectName;
-            _workItemStore = workItemStore;
+            _workItemStore = WorkItemStoreManager.GetWorkItemStoreForUrl(url);
         }
 
         public RequirementsDocument[] FindAllWorkItemsForProject()

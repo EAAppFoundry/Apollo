@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using ApolloCrawler.Configuration;
 using ApolloCrawler.Mapping;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 using Microsoft.TeamFoundation.Client;
 using SolrNet;
+using Project = Microsoft.TeamFoundation.WorkItemTracking.Client.Project;
 
 namespace ApolloCrawler
 {
@@ -13,47 +14,118 @@ namespace ApolloCrawler
     {
         private static void Main(string[] args)
         {
-            Startup.Init<RequirementsDocument>("http://localhost:8983/solr");
+            if (args.Length > 0)
+            {
+                if (args[0].Trim().Equals("dump",StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (args.Length == 2)
+                    {
+                        string url = args[1];
 
+                        DoDumpConfig(url);
+                    }
+
+                    return;
+                } 
+                if (args[0].Trim().Equals("fieldDump", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (args.Length == 3)
+                    {
+                        int workItemID = int.Parse(args[1]);
+                        string url = args[2];
+
+                        DoDumpFields(workItemID, url);
+                    }
+
+                    return;
+                }
+            }
+
+            //load config
+            var config = ConfigurationSettings.Load();
+
+            //get solr
+            Startup.Init<RequirementsDocument>(config.SolrUrl);
             var solr = ServiceLocator.Current.GetInstance<ISolrOperations<RequirementsDocument>>();
             solr.Commit();
 
-            Uri collectionUri2010 = new Uri("http://eavtfs2010:8080/tfs");
-            Uri collectionUri2008 = new Uri("http://eavvsts01:8080/");
+            //get correct mapper for each project
+            var mapperFactory = new MapperFactory();
 
-            var workItemStore2008 = GetWorkItemStore(collectionUri2008);
-            var workItemStore2010 = GetWorkItemStore(collectionUri2010);
-
-            //TODO: Move this to a configuration file
-            var mappers = new List<IMapper>();
-            mappers.Add(new ScrumMapper("Commercials (MTS)", workItemStore2008));
-            mappers.Add(new ScrumMapper("Millennium", workItemStore2008));
-            mappers.Add(new ScrumMapper("NetOps", workItemStore2008));
-            mappers.Add(new UrbanTurtleMapper("Turner Digital Library", workItemStore2010));
-            
-
-            foreach (var tfsMapper in mappers)
+            //foreach project
+            foreach (var proj in config.Projects)
             {
-                RequirementsDocument[] docs = tfsMapper.FindAllWorkItemsForProject();
+                //get the workitems for that project
+                var mapper = mapperFactory.GetMapperForProject(proj);
+                RequirementsDocument[] docs = mapper.FindAllWorkItemsForProject();
+
+                //submit them to solr
                 solr.AddRange(docs, new AddParameters { CommitWithin = 10000 });
             }
-            
+
+
+            //commit and optimize
             solr.Commit();
             solr.Optimize();
             
 
-            //Console.ReadLine();
-
         }
 
-        private static WorkItemStore GetWorkItemStore(Uri uri)
+        /// <summary>
+        /// Dumps all of the fields for 
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="url"></param>
+        private static void DoDumpFields(int workItemID, string url)
         {
-            // Connect to the server and the store. 
-            TfsTeamProjectCollection teamProjectCollection =
-                new TfsTeamProjectCollection(uri);
+            //connect to TFS
+            WorkItemStore wis = WorkItemStoreManager.GetWorkItemStoreForUrl(url);
 
-            WorkItemStore workItemStore = teamProjectCollection.GetService<WorkItemStore>();
-            return workItemStore;
+            var wi = wis.GetWorkItem(workItemID);
+
+            foreach (Field field in wi.Fields)
+            {
+                Console.WriteLine(field.Name + " := " + field.Value);
+            }
         }
+
+
+        /// <summary>
+        /// Print out an example config file of all tfs projects for the given url
+        /// </summary>
+        /// <param name="url"></param>
+        private static void DoDumpConfig(string url)
+        {
+            //connect to TFS
+            WorkItemStore wis = WorkItemStoreManager.GetWorkItemStoreForUrl(url);
+            
+            //get a list of projects
+
+            Project[] projs = wis.Projects.Cast<Project>().ToArray();
+            
+            //create a new config
+            var config = new ConfigurationSettings();
+
+            //populate it with a dummy solr url
+            config.SolrUrl = "!!Your Solr url here!!";
+
+            //put the projects into it
+            config.Projects=projs.Where(X => X.HasWorkItemReadRights)
+                            .Select(X => new Configuration.Project()
+                                             {
+                                                 ProjectName = X.Name, 
+                                                 SystemType = SystemType.TFS2010, 
+                                                 Url = url
+                                             }).ToArray();
+            
+            //serialize it
+            string configXml = config.Serialize();
+
+            //print it out to the console
+            Console.WriteLine(configXml);
+
+        }
+
+        
     }
 }
