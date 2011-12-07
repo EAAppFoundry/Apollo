@@ -9,6 +9,7 @@ namespace Apollo.PivotalGateway
         public string Position { get; set; }
         public bool Complete { get; set; }
         public string Created_At { get; set; }
-        public DateTime CreatedAt { get; set; }
+        //public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
     }
 }

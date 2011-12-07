@@ -41,30 +41,30 @@ namespace Apollo.PivotalGateway
         public string Name { get; set; }
         public string Requested_By { get; set; }
         public string Owned_By { get; set; }
-        
-        //public DateTime CreatedAt
-        //{
-        //    get { return DateFormatter.Format(Created_At); }
-        //}
+
+        public DateTime CreatedAt
+        {
+            get { return DateFormatter.Format(Created_At); }
+        }
 
         public string Created_At { get; set; }
 
-        //public DateTime AcceptedAt
-        //{
-        //    get { return DateFormatter.Format(Accepted_At); }
-        //}
+        public DateTime AcceptedAt
+        {
+            get { return DateFormatter.Format(Accepted_At); }
+        }
         public string Accepted_At { get; set; }
 
-        //public DateTime UpdatedAt
-        //{
-        //    get { return DateFormatter.Format(Updated_At); }
-        //}
+        public DateTime UpdatedAt
+        {
+            get { return DateFormatter.Format(Updated_At); }
+        }
 
         public string Updated_At { get; set; }
 
         public string Labels { get; set; }
-        public List<Attachment> Attachments { get; set; }
+        //public List<Attachment> Attachments { get; set; }
         public List<Note> Notes { get; set; }
-        public List<Task> Tasks { get; set; }
+        //public List<Task> Tasks { get; set; }
     }
 }

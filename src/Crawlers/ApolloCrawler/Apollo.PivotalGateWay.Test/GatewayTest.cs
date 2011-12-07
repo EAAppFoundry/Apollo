@@ -44,6 +44,7 @@ namespace Apollo.PivotalGateway.Test
         [Test]
         public void GetFirstStory()
         {
+            
             var pivotHub = new Agent("340079");
             var firstStory = pivotHub.Stories(100, 1);
             Assert.IsNotNull(firstStory);

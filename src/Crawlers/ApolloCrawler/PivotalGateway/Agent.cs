@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using RestSharp;
 
 namespace Apollo.PivotalGateway
@@ -99,8 +101,8 @@ namespace Apollo.PivotalGateway
 
         private IEnumerable<Story> GetProjectStories(int limit, int offset)
         {
-        // "http://www.pivotaltracker.com/services/v3/projects/$PROJECT_ID/stories?limit=10&offset=20"
-   
+
+            // "http://www.pivotaltracker.com/services/v3/projects/$PROJECT_ID/stories?limit=10&offset=20"
 
             InitializePivotalRestClient();
 
@@ -109,6 +111,7 @@ namespace Apollo.PivotalGateway
             var request = new PivotalRestRequest(requestFormat, Method.GET);
 
             var myStories = _client.Execute<Stories>(request);
+
 
             return myStories.Data.Value;
 

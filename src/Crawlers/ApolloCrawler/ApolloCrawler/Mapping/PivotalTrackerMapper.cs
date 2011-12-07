@@ -28,14 +28,16 @@ namespace ApolloCrawler.Mapping
 
         public RequirementsDocument[] FindAllWorkItemsForProject()
         {
-            const int batchsize = 10;
+            const int batchsize = 100;
             var currentIndex = 1;
             IEnumerable<Story> stories;
             var requirementsDocuments = new List<RequirementsDocument>();
 
-            while ((stories = _agent.Stories(batchsize,currentIndex)) != null)
+            while ((stories = _agent.Stories(batchsize,currentIndex)) != null )
             {
+                if (stories.Count() == 0) break;
                 requirementsDocuments.AddRange(stories.Select(TranslatePivotalToSolr));
+
                 currentIndex += batchsize; 
             }
             return requirementsDocuments.ToArray();
