@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationSettings.cs" />
     <Compile Include="Configuration\Project.cs" />
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="IDGenerator.cs" />
     <Compile Include="Mapping\PivotalGatewayAgent.cs" />
     <Compile Include="Mapping\PivotalTrackerMapper.cs" />

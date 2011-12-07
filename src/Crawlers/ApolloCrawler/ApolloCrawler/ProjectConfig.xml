@@ -50,5 +50,10 @@
     <SystemType>TFSScrum</SystemType>
     <Url>http://eavvsts01:8080/</Url>
   </Projects>
-  
+  <Projects>
+    <ProjectName>Program Mgmt</ProjectName>
+    <Department>Scarlett</Department>
+    <SystemType>Pivotal</SystemType>
+    <Url>https://www.pivotaltracker.com/services/v3/</Url>
+  </Projects>
 </ConfigurationSettings>

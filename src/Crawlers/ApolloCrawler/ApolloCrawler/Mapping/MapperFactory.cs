@@ -16,7 +16,7 @@ namespace ApolloCrawler.Mapping
                     case SystemType.TFS2010Scrum:
                         return new Scrum2010Mapper(project);
                     case SystemType.Pivotal:
-                        return new PivotalTrackerMapper(project.ProjectName,project.Url);
+                        return new PivotalTrackerMapper(project);
             }
 
             return null;

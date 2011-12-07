@@ -63,7 +63,6 @@ namespace ApolloCrawler
                 solr.AddRange(docs, new AddParameters { CommitWithin = 10000 });
             }
 
-            PopulatePivotalProject(mapperFactory, solr);
 
             //commit and optimize
             solr.Commit();

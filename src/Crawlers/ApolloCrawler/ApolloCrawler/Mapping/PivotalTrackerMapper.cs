@@ -10,20 +10,16 @@ namespace ApolloCrawler.Mapping
         #region IMapper Members
 
 
-        private string _systemName = "PivotalTracker";
-        private string _projectName=null;
         private Apollo.PivotalGateway.Agent _agent;
-
+        private Configuration.Project _project = null;
       
 
         #endregion
 
-
-
-        public PivotalTrackerMapper(string projectName, string url)
+        public PivotalTrackerMapper(Configuration.Project project)
         {
-            _projectName = projectName;
-            _agent = PivotalGatewayAgent.GetPivotalAgent(projectName, url);
+            _project = project;
+            _agent = PivotalGatewayAgent.GetPivotalAgent(project.ProjectName, project.Url);
         }
 
         public RequirementsDocument[] FindAllWorkItemsForProject()
@@ -50,12 +46,12 @@ namespace ApolloCrawler.Mapping
 
             return new RequirementsDocument()
                        {
-                           ID = IDGenerator.GetUniqueIDForDocument(pivotalstory.Id.ToString(), _systemName),
+                           ID = IDGenerator.GetUniqueIDForDocument(pivotalstory.Id.ToString(), _project.SystemType.ToDescription()),
                            Title = pivotalstory.Name,
                            Status = pivotalstory.Current_State,
-                           Project = _projectName,
-                           Department = "EA",
-                           SystemSource = _systemName,
+                           Project = _project.ProjectName,
+                           Department = _project.Department,
+                           SystemSource = _project.SystemType.ToDescription(),
                            LastIndexed = DateTime.Now,
                            Description = pivotalstory.Description,
                            //AcceptanceCriteria = "Accepted At " + pivotalstory.AcceptedAt,
