@@ -164,7 +164,7 @@ function hookPagerClicks() {
 function hookPopoverEvents()
 {
  $(".popuplink").popover({
-			offset: 10
+			html: true
 			})
 			.click(function(e) {
 			e.preventDefault()
