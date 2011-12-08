@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Apollo</title>
+    <script src="Scripts/jquery-1.6.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tmpl.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.cookie.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.jsonp-2.1.4.min.js" type="text/javascript"></script>
+    <script src="Scripts/SolrUrl.js" type="text/javascript"></script>
+    <script src="Scripts/Index.js" type="text/javascript"></script>
+	<script src="Scripts/bootstrap-twipsy.js" type="text/javascript"></script>
+	<script src="Scripts/bootstrap-popover.js" type="text/javascript"></script>
+    <style>
+           html { font-family: Arial, Sans-Serif; font-size: small;}
+    </style>
+	<link href="./bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 50px;
+      }
+    </style>
+</head>
+<body>
+	<div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="index.html">Apollo</a>
+          <ul class="nav">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	 <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+		  <img src=".\images\Apollo.jpg" width="100px" height="150px" />
+          <div id="facetsDiv"> </div>
+        </div>
+      </div>
+      <div class="content">
+	    <div class="hero-unit">
+		  <h3>Search for...</h3>
+          <input id="txtSearch" style="width: 500px"/>
+		  <select id="lstPerPage">
+			<option>10</option>
+			<option selected>20</option>
+			<option>50</option>
+			<option>100</option>
+		  </select>
+          <input class="btn primary large" type="button" value="Go" id="btnSearch" />
+        </div>
+		<div class="hero-unit">
+		<div id="resultsDiv">    
+		<table class="zebra-striped">
+				<tr>
+					<td>
+					   <a data-placement="below" href="#" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A title">More</a>
+						<a  href="www.cnn.com" target="_blank"><b>cnn</b></a>
+						<small><i>Indexed: </i></small>
+					   
+				   </td>
+			   </tr>
+			   
+			  <tr>
+					<td>
+					   <a class="btn danger" data-placement="below" href="#" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A title">
+						<a  rel="popover" href="www.cnn.com" target="_blank"><b>cnn</b></a>
+						<small><i>Indexed: </i></small>
+					   </a>
+				   </td>
+			   </tr>
+			   
+			  <tr>
+					<td>
+					   <a class="btn danger" data-placement="below" href="#" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A title">
+						<a  rel="popover" href="www.cnn.com" target="_blank"><b>cnn</b></a>
+						<small><i>Indexed: </i></small>
+					   </a>
+				   </td>
+			   </tr>
+			   <script>
+            $(function () {
+              $("a[rel=popover]")
+                .popover({
+                  offset: 10
+                })
+                .click(function(e) {
+                  e.preventDefault()
+                })
+            })
+         </script>
+		<table>
+		</div>
+		</div>
+	  </div>
+	</div>      
+</body>
+		
+
+</html>
