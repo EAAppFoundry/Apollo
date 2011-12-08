@@ -15,6 +15,11 @@
         padding-top: 50px;
       }
       html { font-family: Arial, Sans-Serif; font-size: small;}
+      
+      .label.primary
+      {
+          background-color: #049cdb;
+      }
     </style>
 
 </head>
@@ -45,8 +50,8 @@
       <div class="content">
 	    <div class="hero-unit">
 		  <h3>Search for code...</h3>
-          <input id="txtSearch" style="width: 500px"/>
-		  <select id="lstPerPage">
+          <input id="txtSearch" class="span6"/>
+		  <select id="lstPerPage" class="span1">
 			<option>10</option>
 			<option selected>20</option>
 			<option>50</option>
@@ -123,32 +128,36 @@
     </script>
     <script id="facetsTemplate" type="text/x-jQuery-tmpl">
         Category:
-        <ul>
+        <ul style="list-style-type: none;">
             {{each(i,facet) categoryFacets}}
             {{if _searchParams.category==facet.term}}
-                <li style="background-color: #FFFF00"><a href="#top" class="categoryFacetLink">${facet.term}</a> (${facet.count}) &nbsp;&nbsp;&nbsp;<a href="#top" class="removeFacet">X</a></li>
+                <li><a href="#top" class="label primary categoryFacetLink">${facet.term}</a> (${facet.count})</li>
             {{else}}
                 {{if facet.count>0}}
-                    <li><a href="#top" class="categoryFacetLink">${facet.term}</a> (${facet.count})</li>
+                    <li><a style="list-style: none;" href="#top" class="categoryFacetLink">${facet.term}</a> (${facet.count})</li>
                 {{/if}}
             {{/if}}
             {{/each}}
         </ul>
         <br/>
         Project:
-        <ul>
+        <ul style="list-style-type: none;">
         {{each(i,facet) projectFacets}}
         {{if _searchParams.project==facet.term}}
-            <li style="background-color: #FFFF00"><a href="#top" class="projectFacetLink">${facet.term}</a> (${facet.count}) &nbsp;&nbsp;&nbsp;<a href="#top" class="removeFacet">X</a></li>
+            <li><a href="#top" class="label primary projectFacetLink">${facet.term}</a> (${facet.count})</li>
         {{else}}
             {{if facet.count>0}}
-            <li><a href="#top" class="projectFacetLink">${facet.term}</a> (${facet.count})</li>
+                <li><a href="#top" class="projectFacetLink">${facet.term}</a> (${facet.count})</li>
             {{/if}}
         {{/if}}
         {{/each}}
         </ul>
         
         <br/>
+        
+        {{if (_searchParams.project || _searchParams.category)}}
+        <input type="button" value="Remove filter" id="btnClearFacets" class="removeFacet btn primary"></button>
+        {{/if}}
 
     </script>
     

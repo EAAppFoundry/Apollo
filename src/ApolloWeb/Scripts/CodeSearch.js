@@ -72,7 +72,8 @@ function getPageSize() {
 
 function buildSearchUrl() {
     var searchString = getSearchString();
-    var url = _codeSolrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=id,fullpath,project,name,timestamp,category&echoparms=true&facet=true&facet.field=category&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
+    var returnedFields = "id,fullpath,project,name,timestamp,category";
+    var url = _codeSolrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=" + returnedFields + "&echoparms=true&facet=true&facet.field=category&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
 
     if (_searchParams.project!=null)
         url+= "&fq=project:\"" + escape(_searchParams.project) + "\"";
