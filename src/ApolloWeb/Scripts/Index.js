@@ -72,7 +72,7 @@ function getPageSize() {
 
 function buildSearchUrl() {
     var searchString = getSearchString();
-    var returnedFields = "id,project,title,lastindexed,department,storyuri"
+    var returnedFields = "id,project,title,lastindexed,department,storyuri,description"
     var url = _solrHost + "/select/?start=" + _searchParams.startRecord.toString() + "&rows=" + _searchParams.pageSize.toString() + "&indent=on&hl=true&hl.fl=*&hl.simple.pre=%3Cb%3E&hl.simple.post=%3C/b%3E&fl=" + returnedFields + "&echoparms=true&facet=true&facet.field=department&facet.field=project&wt=json&json.wrf=?&q=" + escape(searchString);
 
     if (_searchParams.project!=null)
@@ -109,6 +109,7 @@ function onSearchResultComplete(result) {
     //hook click events to the << >> and page number links
     hookPagerClicks();
    
+    hookPopoverEvents();
 }
 
 function buildFacetResults(result) {
@@ -160,7 +161,15 @@ function hookPagerClicks() {
         loadSearchResultPage(_searchParams.pageNumber+1);
     });
 }
-
+function hookPopoverEvents()
+{
+ $(".popuplink").popover({
+			offset: 10
+			})
+			.click(function(e) {
+			e.preventDefault()
+			});
+}
 
 function formatTimestamp(timestamp) {
     if (timestamp==undefined)

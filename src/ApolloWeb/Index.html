@@ -8,6 +8,9 @@
     <script src="Scripts/jquery.jsonp-2.1.4.min.js" type="text/javascript"></script>
     <script src="Scripts/SolrUrl.js" type="text/javascript"></script>
     <script src="Scripts/Index.js" type="text/javascript"></script>
+	<script src="Scripts/bootstrap-twipsy.js" type="text/javascript"></script>
+	<script src="Scripts/bootstrap-popover.js" type="text/javascript"></script>
+	
     <style>
            html { font-family: Arial, Sans-Serif; font-size: small;}
     </style>
@@ -43,7 +46,7 @@
 	    <div class="hero-unit">
 		  <h3>Search for requirements...</h3>
           <input id="txtSearch" style="width: 500px"/>
-		  <select id="lstPerPage">
+		  <select id="lstPerPage" style="width: 100px">
 			<option>10</option>
 			<option selected>20</option>
 			<option>50</option>
@@ -80,16 +83,16 @@
             Showing records ${(_searchParams.pageSize*_searchParams.pageNumber)+1} through ${getMaxRecordCount()}<br/><br/>
 			<table class="zebra-striped">
              {{each(i,doc) response.docs}}
-				<tr>
+				<tr >
 					<td>
-						<a href="${doc.storyuri}" target="_blank"><b>${doc.title}</b></a><br/>
+						<a class="popuplink" data-placement="right" href="#" rel="popover" data-content="${doc.description}" data-original-title="${doc.title}"><b>${doc.title}</b></a><br/>
 					   ..{{html highlighting[doc.id].description}}..
 					   <br/>
 					   <small>${doc.project}</small>
 					   <br/>
 					   <small><i>Indexed: ${formatTimestamp(doc.lastindexed)}</i></small>
 					   <br/>
-					   <br/>
+					   <a href="${doc.storyuri}" target="_blank"><b>more...</b></a><br/>
 				   </td>
 			   </tr>
              {{/each}}
@@ -119,6 +122,17 @@
 
         </div>
     </script>
+	<script>
+		$(function () {
+			$("a[rel=popover]")
+			.popover({
+			offset: 10
+			})
+			.click(function(e) {
+			e.preventDefault()
+			})
+		})
+	</script>
     <script id="facetsTemplate" type="text/x-jQuery-tmpl">
         Department:
         <ul>
