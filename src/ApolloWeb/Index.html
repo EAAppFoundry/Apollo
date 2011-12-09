@@ -25,6 +25,11 @@
       {
           background-color: #049cdb;
       }
+	.grayTD
+	  {
+		vertical-align: middle;
+		text-align: right;
+	  }
     </style>
 </head>
 <body>
@@ -90,16 +95,21 @@
 			<table class="zebra-striped">
              {{each(i,doc) response.docs}}
 				<tr >
-					<td>
-						<a class="popuplink" data-placement="right" href="#" rel="popover" data-content="${doc.description}" data-original-title="${doc.title}"><b>${doc.title}</b></a><br/>
+					<td class="span13">
+						<a href="${doc.storyuri}" target="_blank"><b>${doc.title}</b></a><br/>
 					   ..{{html highlighting[doc.id].description}}..
 					   <br/>
 					   <small>${doc.project}</small>
 					   <br/>
 					   <small><i>Indexed: ${formatTimestamp(doc.lastindexed)}</i></small>
 					   <br/>
-					   <a href="${doc.storyuri}" target="_blank"><b>more...</b></a><br/>
 				   </td>
+				   <td class="span1 grayTD" > 
+					<ul class="tabs"> 
+						<li class="active"><a class="popuplink" data-placement="right" href="#" rel="popover" data-content="${doc.description}" data-original-title="${doc.title}"><b>>></b></a></li>
+					</ul> 
+				   </td>
+				   <td >&nbsp;</td>
 			   </tr>
              {{/each}}
              <br/>
@@ -132,7 +142,7 @@
 		$(function () {
 			$("a[rel=popover]")
 			.popover({
-			offset: 10
+			html: true
 			})
 			.click(function(e) {
 			e.preventDefault()
