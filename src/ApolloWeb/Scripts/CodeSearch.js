@@ -163,8 +163,15 @@ function hookPagerClicks() {
 
 
 function formatTimestamp(timestamp) {
-    var newDate = new Date(timestamp);
-    return newDate.toString();
+    if (timestamp==undefined)
+        return "";
+
+    var tsx = new Date(timestamp);
+    var ts = Date.parse(tsx);
+    if (ts==null)
+        return "";
+
+    return ts.toString('M/d/yyyy h:mm tt');
 }
 
 $(document).ready(function () {

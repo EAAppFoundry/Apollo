@@ -175,9 +175,9 @@ function formatTimestamp(timestamp) {
     if (timestamp==undefined)
         return "";
 
-    var newDate = new Date(timestamp);
-    
-    return newDate.toString();
+    var ts = Date.parse(timestamp);
+
+    return ts.toString('M/d/yyyy h:mm tt');
 }
 
 $(document).ready(function () {

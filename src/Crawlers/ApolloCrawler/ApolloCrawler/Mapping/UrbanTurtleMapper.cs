@@ -2,6 +2,7 @@
 using System.Linq;
 using ApolloCrawler.Mapping;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
+using SolrNet.Utils;
 
 namespace ApolloCrawler.Mapping
 {
@@ -45,13 +46,13 @@ namespace ApolloCrawler.Mapping
             return new RequirementsDocument()
                        {
                            ID = IDGenerator.GetUniqueIDForDocument(wi.Fields["ID"].Value.ToString(),_systemName),
-                           Title = wi.Fields["Title"].Value.ToString(),
+                           Title = HttpUtility.HtmlEncode(wi.Fields["Title"].Value.ToString()),
                            Status = wi.Fields["State"].Value.ToString(),
                            Project = wi.Fields["Team Project"].Value.ToString(),
                            Department = _project.Department,
                            SystemSource = _systemName,
                            LastIndexed = DateTime.Now,
-                           Description = wi.Fields["Description"].Value.ToString(),
+                           Description = HttpUtility.HtmlEncode(wi.Fields["Description"].Value.ToString()),
                            AcceptanceCriteria = "", //doesn't have it
                            Team = wi.Fields["Team Project"].Value.ToString(),
                            Area = wi.Fields["Area Path"].Value.ToString(),

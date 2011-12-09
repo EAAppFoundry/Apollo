@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Apollo.PivotalGateway;
+using SolrNet.Utils;
 
 namespace ApolloCrawler.Mapping
 {
@@ -47,13 +48,13 @@ namespace ApolloCrawler.Mapping
             return new RequirementsDocument()
                        {
                            ID = IDGenerator.GetUniqueIDForDocument(pivotalstory.Id.ToString(), _project.SystemType.ToDescription()),
-                           Title = pivotalstory.Name,
+                           Title = HttpUtility.HtmlEncode(pivotalstory.Name),
                            Status = pivotalstory.Current_State,
                            Project = _project.ProjectName,
                            Department = _project.Department,
                            SystemSource = _project.SystemType.ToDescription(),
                            LastIndexed = DateTime.Now,
-                           Description = pivotalstory.Description,
+                           Description = HttpUtility.HtmlEncode(pivotalstory.Description),
                            //AcceptanceCriteria = "Accepted At " + pivotalstory.AcceptedAt,
                            StoryPoints = pivotalstory.Estimate.ToString(),
                            ReleaseIteration = "tbd",
